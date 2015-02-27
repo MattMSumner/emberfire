@@ -1,8 +1,6 @@
 /* jshint node: true */
 'use strict';
 
-var SilentError = require('ember-cli/lib/errors/silent');
-
 module.exports = {
   normalizeEntityName: function() {
     // this prevents an error when the entityName is
@@ -15,14 +13,10 @@ module.exports = {
   ],
 
   locals: function(options) {
-    if (!options.url) {
-      throw new SilentError('you need to provide a firebase url e.g. ember generate emberfire --url=https://YOUR-FIREBASE-NAME.firebaseio.com/')
-    }
-
     return {
       modulePrefix: options.project.pkg.name,
-      firebaseUrl: options.url
-    }
+      firebaseUrl: options.url || 'https://YOUR-FIREBASE-NAME.firebaseio.com/'
+    };
   },
 
   afterInstall: function() {
